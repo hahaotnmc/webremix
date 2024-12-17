@@ -4,7 +4,7 @@
 
 # Dowload thu vien
 
- tro den file du an , Su dung cau lenh sau de tai node_module
+tro den file du an , Su dung cau lenh sau de tai node_module
 
 ```shellscript
 npm install
@@ -18,16 +18,41 @@ Mo terminal , tro den file du an va dung cau lenh sau :
 npx prisma generate
 ```
 
-
-
 # Chay du an
 
 Chay du an bang cau lenh duoi day:
 
 ```sh
-npx run dev
+npm run dev
 ```
 
-## Styling
+# Tài khoản paypal demo:
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+## Personal:
+
+Tài khoản personal dùng để thanh toán đơn hàng.
+EMAIL:
+
+```sh
+sb-mahjt34846810@personal.example.com
+```
+
+Password :
+
+```sh
+6b=^mp%W
+```
+
+## business:
+
+EMAIL:
+
+```sh
+sb-qcrkl34848807@business.example.com
+```
+
+Password :
+
+```sh
+U*8o))Uz
+```
