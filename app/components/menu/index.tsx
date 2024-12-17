@@ -12,8 +12,11 @@ export default function Menu (){
         <Link to={'/'} className="text-white text-2xl font-bold tracking-wide">
           Trang chủ
         </Link>
-        <Link to={'/add'} className=" ml-4 text-white text-2xl font-bold tracking-wide">
+        <Link to={'/add'} className=" ml-4 text-white text-xl font-bold tracking-wide">
           Thêm sản phẩm
+        </Link>
+        <Link to={'/donhang'} className=" ml-4 text-white text-xl font-bold tracking-wide">
+          Đơn hàng
         </Link>
         </div>
 

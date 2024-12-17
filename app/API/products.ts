@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import { Cart } from "./carts";
+import { PrismaClient, Tag } from "@prisma/client";
 import initProduct from "./initProduct";
+
 
 export type Product = {
     id: number;
@@ -9,10 +9,13 @@ export type Product = {
     price: number;
     image: string;
     createdAt: Date;
-    cart: Cart[];
+    tagId: number;
+    tag: Tag
+    
 };
 export async function getProducts() {
   const prisma = new PrismaClient();
+  
   const products = await prisma.product.findMany();
   if (products.length ==0){
     initProduct();

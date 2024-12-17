@@ -1,8 +1,6 @@
 
 import { Link } from "@remix-run/react";
 import { useEffect, useReducer } from "react";
-import { CartWithProduct } from "~/API/carts";
-
 
 const initState ={
     products: [],
@@ -71,7 +69,7 @@ const reducer = (state:any , action: any) =>{
                 ...state,
                 money: state.products.reduce((total:any, cartItem:any) => (
                     total + cartItem.quantity * cartItem.product.price
-                ), 0).toLocaleString()
+                ), 0).toFixed(2)
             }
             break;
         }
@@ -138,6 +136,17 @@ export default function ListCart(){
     const [state , dispatch] = useReducer(reducer , initState);
     const {products , money} = state;
 
+
+    function handeleXacNhanVaThanhToan(money:number){
+        if(money==0){
+            alert("Hãy thêm vài sản phẩm vào giỏ hàng và bắt đầu mua sắm !!!")
+        }
+        else{
+            alert("Bạn sẽ sang trang thanh toán & order")
+            window.location.href = "/payment";
+        }
+    }
+
     function handleAddproduct (id: number){
         dispatch(addProduct(id));
         dispatch(setProduct());
@@ -158,9 +167,21 @@ export default function ListCart(){
     useEffect(() => {
         dispatch(setMoney());
     }, [products]);
+    if(products.length == 0){
+        return (
+            <div className="flex flex-col items-center justify-center  bg-gray-100">
+            <div className=" p-8 rounded-lg shadow-lg w-full text-center">
+                <h2 className="text-2xl font-bold mb-4 text-gray-800">Danh sách sản phẩm</h2>
+                <p className="text-gray-500 text-lg">Không có sản phẩm trong giỏ hàng</p>
+            </div>
+            </div>
+    )
+    }
+
+
     return (
         <div className="container mx-auto p-6">
-            <h2 className="text-2xl font-bold mb-4">List Product</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Danh sách sản phẩm</h2>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {products.map((item:any) => (
@@ -213,7 +234,7 @@ export default function ListCart(){
                         Xóa sản phẩm
                         </button>
                         <span className="text-gray-800 font-semibold">
-                        {item.product.price.toLocaleString()} VND
+                            $ {item.product.price.toFixed(2)}
                         
                         </span>
                     </div>
@@ -224,8 +245,17 @@ export default function ListCart(){
 
             <div className="mt-8">
                 <h1 className="text-2xl font-bold text-gray-800">
-                Tổng Cộng: {money} VND
+                Tổng Cộng: $ {money}
                 </h1>
+                
+                <button className=" mt-4 text-2xl font-bold bg-red-500 text-white px-6 py-4 rounded-lg hover:bg-red-600 transition duration-300"
+                onClick={()=>{
+                    handeleXacNhanVaThanhToan(money)
+                }}
+                >
+                    Xác nhận đơn hàng và thanh toán
+                </button>
+                
             </div>
             </div>
 

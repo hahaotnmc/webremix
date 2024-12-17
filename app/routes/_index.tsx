@@ -1,11 +1,32 @@
+import { PrismaClient } from "@prisma/client";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { getProducts, Product } from "~/API/products";
+import { json,  } from "@remix-run/react";
 import ProductList from "~/components/listProduct";
 
 
 
 import Menu from "~/components/menu";
+
+const prisma = new PrismaClient();
+export const loader: LoaderFunction = async () => {
+  
+    
+  try {
+    // Lấy dữ liệu từ database
+    const tags2 = await prisma.tag.findMany();
+    const products = await prisma.product.findMany();
+ 
+    
+    // Trả về dữ liệu dưới dạng JSON
+    return json({
+      tags2: tags2 || [],
+      products: products || [],
+    });
+  } catch (error) {
+    throw new Response("Failed to load data", { status: 500 });
+  }
+};
+
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,10 +34,6 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
-export  const loader: LoaderFunction = ()=>{
-  
-  return getProducts();
-}
 
 
 
@@ -24,9 +41,13 @@ export  const loader: LoaderFunction = ()=>{
 
 export default function Index() {
 
-const products = useLoaderData<Product[]>()
 
+  
   return (
+
+
+
+
     <div>
       <div>
         <Menu/>
@@ -38,5 +59,13 @@ const products = useLoaderData<Product[]>()
       </div>
     </div>
   );
+}
+
+function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
+
+function setError(arg0: string) {
+  throw new Error("Function not implemented.");
 }
 

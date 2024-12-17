@@ -17,4 +17,13 @@ model Product {
   price       Float
   image       String
   createdAt   DateTime @default(now())
+  tagId       Int // Khóa ngoại liên kết với bảng Tag
+  tag         Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade) // Mối quan hệ một-nhiều
+}
+
+model Tag {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  products  Product[] // Quan hệ một-nhiều
 }
