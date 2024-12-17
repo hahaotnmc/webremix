@@ -4,7 +4,7 @@
 
 # Dowload thu vien
 
-Su dung cau lenh sau de tai node_module
+ tro den file du an , Su dung cau lenh sau de tai node_module
 
 ```shellscript
 npm install
@@ -15,14 +15,10 @@ npm install
 Mo terminal , tro den file du an va dung cau lenh sau :
 
 ```sh
-npx prisma init --datasource-provider sqlite
+npx prisma generate
 ```
 
-Tiep theo mo terminal , tro den file du an va dung cau lenh
 
-```sh
-npx prisma migrate dev --name init
-```
 
 # Chay du an
 
